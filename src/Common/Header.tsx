@@ -1,12 +1,17 @@
-import React from "react";
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import React, { useState } from "react";
+import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import CodeSandBoxToggleSwitch from "./CodeSandBoxToggleSwitch";
+type HeaderProps = {
+  checked: boolean;
+  onToggle: (value: boolean) => void; // 親に値を渡す関数
+};
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ onToggle, checked }) => {
   const navigate = useNavigate();
-
+  
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white", color: "black" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "white", color: "black" }}>
       <Toolbar>
         <Typography
           variant="h6"
@@ -17,7 +22,6 @@ const Header = () => {
           }}
         >
           💻 千葉さんのプログラムレッスン 💻
-        </Typography>
         <Button
           variant="contained"
           color="primary"
@@ -30,6 +34,8 @@ const Header = () => {
         >
           ホームへ戻る
         </Button>
+        </Typography>
+        <CodeSandBoxToggleSwitch checked={checked} onToggle={(value) =>{onToggle(value);}}  />
       </Toolbar>
     </AppBar>
   );

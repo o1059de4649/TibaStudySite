@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 
 type CodeBlockProps = {
-  code: string;
+  children: ReactNode; // 子要素としてコードを受け取る
 };
 
-const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
+const CodeBlock: React.FC<CodeBlockProps> = ({ children }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(code);
+      const codeText = typeof children === "string" ? children : "";
+      await navigator.clipboard.writeText(codeText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000); // 2秒後に通知を消す
     } catch (error) {
@@ -20,7 +21,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => {
   return (
     <div style={styles.container}>
       <pre style={styles.codeArea}>
-        <code>{code}</code>
+        <code>{children}</code>
       </pre>
       <button onClick={handleCopy} style={styles.copyButton}>
         📋 コピー
