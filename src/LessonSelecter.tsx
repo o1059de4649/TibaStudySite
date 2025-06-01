@@ -17,7 +17,7 @@ const LessonSelecter = () => {
               color="primary"
               onClick={() => navigate(section.URL)} // URL変更＋遷移
               style={{
-                width: "200px",
+                minWidth: "200px",
                 fontWeight: "bold",
                 textTransform: "none",
                 boxShadow: "2px 2px 10px rgba(0,0,0,0.2)",
